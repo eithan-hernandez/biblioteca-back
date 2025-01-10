@@ -5,33 +5,33 @@ export class Libro {
   @PrimaryGeneratedColumn()
   idLibro: number;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
+  @Column()
   isbn: string;
 
-  @Column({ type: 'varchar', length: 250, nullable: true })
+  @Column()
   titulo: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
+  @Column()
   categoria: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
+  @Column()
   autor: string;
 
-  @Column({ type: 'int', nullable: true })
+  @Column()
   paginas: number;
 
-  @Column({ type: 'varchar', length: 150, nullable: true })
+  @Column()
   impresion: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
+  @Column()
   precio: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
+  @Column({nullable: true})
   version: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({nullable: true})
   descripcion: string;
 
-  @Column({ type: 'int', nullable: true })
+  @Column({nullable: true})
   year: number;
 }

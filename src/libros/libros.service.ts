@@ -1,26 +1,46 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLibroDto } from './dto/create-libro.dto';
 import { UpdateLibroDto } from './dto/update-libro.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Libro } from './entities/libro.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class LibrosService {
-  create(createLibroDto: CreateLibroDto) {
-    return 'This action adds a new libro';
+
+  constructor(
+      @InjectRepository(Libro)
+      private readonly libroRepository: Repository<Libro>
+  
+    ) {}
+
+  async create(createLibroDto: CreateLibroDto) {
+    const libro = this.libroRepository.create(createLibroDto);
+    return await this.libroRepository.save(libro);
   }
 
-  findAll() {
-    return `This action returns all libros`;
+  async findAll() {
+    return await this.libroRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} libro`;
+  async findOne(idLibro: number) {
+    const libro = await this.libroRepository.findOneBy({idLibro});
+    if (!libro) {
+      throw new Error('Libro no encontrado');
+    }
+    return libro;
   }
 
-  update(id: number, updateLibroDto: UpdateLibroDto) {
-    return `This action updates a #${id} libro`;
+  async update(idLibro: number, updateLibroDto: UpdateLibroDto) {
+    return await this.libroRepository.update(idLibro,updateLibroDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} libro`;
+  async remove(idLibro: number) {
+    const result =  await this.libroRepository.delete(idLibro);
+    if (result.affected === 0) {
+      throw new Error('Libro no encontrado');
+    }
+
+    return result;
   }
 }
