@@ -1,0 +1,66 @@
+DROP DATABASE Portal;
+CREATE DATABASE Portal;
+USE Portal;
+
+CREATE TABLE Libro (
+  idLibro integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  isbn varchar(100),
+  titulo varchar(250),
+  categoria varchar(100),
+  autor varchar(100),
+  paginas integer,
+  impresion varchar(150),
+  precio varchar(100),
+  version varchar(100),
+  descripcion text,
+  year integer
+);
+
+CREATE TABLE PdfLibro (
+  idPdf integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `idLibro`integer,
+  ruta varchar(250)
+);
+
+CREATE TABLE Imagen (
+  idImagen integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `idLibro`integer,
+  ruta varchar(250)
+);
+
+CREATE TABLE Visualizacion (
+  idVisualizacion integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `idLibro`integer,
+  ruta varchar(250)
+);
+
+CREATE TABLE Video (
+  idVideo integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `idLibro`integer,
+  ruta varchar(250)
+);
+
+CREATE TABLE Compra (
+  idCompra integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `idLibro`integer,
+  ruta varchar(250)
+);
+
+CREATE TABLE Admin (
+  idAdmin integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    usuario varchar(100),
+    password varchar(350)
+);
+
+ALTER TABLE Imagen ADD FOREIGN KEY (idLibro) REFERENCES Libro (idLibro);
+
+ALTER TABLE Visualizacion ADD FOREIGN KEY (idLibro) REFERENCES Libro (idLibro);
+
+ALTER TABLE Compra ADD FOREIGN KEY (idLibro) REFERENCES Libro (idLibro);
+
+ALTER TABLE Video ADD FOREIGN KEY (idLibro) REFERENCES Libro (idLibro);
+
+ALTER TABLE PdfLibro ADD FOREIGN KEY (idLibro) REFERENCES Libro (idLibro);
+
+
+ALTER TABLE 'Libro' ADD nombre varchar(100);
