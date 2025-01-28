@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { LibrosModule } from './libros/libros.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -17,6 +18,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    
+
+    AdminModule,
 
   ],
   controllers: [],
